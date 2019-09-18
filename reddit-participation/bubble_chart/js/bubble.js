@@ -1,7 +1,7 @@
 function createChart(){
 
-	var width = 1000;
-	var height = 1000;
+	var width = window.innerWidth;
+	var height = window.innerHeight;
 	
 	// the center coordinate which will be used as a 
 	// center attraction point for the bubbles
@@ -38,12 +38,18 @@ function createChart(){
 
 		// the frequency at which the most common word occurs
 		var maxAmount = d3.max(data, d => (+d.frequency));
+		console.log(maxAmount)
+
+		color = chroma.scale(['white', 'orange'])
+			.domain([2, 200]);
 
 		// use a logarithmic scale for the bubble radius	
 		var radiusScale = d3.scalePow()
 			.exponent(0.5)
-			.range([2, 85])
+			.range([2, 200])
 			.domain([0, maxAmount]);
+
+
 
 		var myNodes = data.map(d => (
 			{
@@ -73,24 +79,20 @@ function createChart(){
 			.data(nodes);
 
 		var newBubbles = bubbles
-			.enter().append('g')
+			.enter().append('g').call(d3.drag);
 
 		newBubbles
 			.append('circle')
 			.attr('r', 0)
-			.attr('fill', '#FF9900')
-			.call(d3.drag);
+			.attr('fill', d => color(d.radius));
 
 
 		newBubbles.append("text")
-	//		.attr("dy", ".3em")
-		.attr("alignment-baseline","central")
+			.attr("dy", ".3em")
 			.style("text-anchor", "middle")
 			.text(d => d.name)
-			.attr("x", "50%")
-			.attr("y", "50%")
 			    .attr("font-family", "sans-serif")
-			    .attr("font-size", 12)
+			    .attr("font-size", d => d.radius / 5)
 			    .attr("fill", "white");
 		
 		bubbles = bubbles.merge(newBubbles);
@@ -108,9 +110,10 @@ function createChart(){
 	};
 
 	function ticked() {
-		circles
-		.attr('cx', d => (d.x))
-		.attr('cy', d => (d.y));
+		bubbles.attr("transform", function (d) {
+        		var k = "translate(" + d.x + "," + d.y + ")";
+			return k
+	})
 	}
 
 	return chart
