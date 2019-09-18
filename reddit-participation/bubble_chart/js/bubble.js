@@ -1,4 +1,3 @@
-
 function createChart(){
 
 	var width = 1000;
@@ -74,28 +73,42 @@ function createChart(){
 			.data(nodes);
 
 		var newBubbles = bubbles
-			.enter()
+			.enter().append('g')
+
+		newBubbles
 			.append('circle')
 			.attr('r', 0)
-			.attr('fill', '#FF9900');
+			.attr('fill', '#FF9900')
+			.call(d3.drag);
+
 
 		newBubbles.append("text")
-			.attr("dy", ".2em")
+	//		.attr("dy", ".3em")
+		.attr("alignment-baseline","central")
 			.style("text-anchor", "middle")
-			.text(d => d.word);
+			.text(d => d.name)
+			.attr("x", "50%")
+			.attr("y", "50%")
+			    .attr("font-family", "sans-serif")
+			    .attr("font-size", 12)
+			    .attr("fill", "white");
 		
 		bubbles = bubbles.merge(newBubbles);
 
-		bubbles.transition()
+		circles = svg.selectAll('circle')
+			.data(nodes);
+
+		circles.transition()
 			.duration(2000)
 			.attr('r', d => (d.radius));
+
 
 		simulation.nodes(nodes);
 		simulation.alpha(1).restart()
 	};
 
 	function ticked() {
-		bubbles
+		circles
 		.attr('cx', d => (d.x))
 		.attr('cy', d => (d.y));
 	}
@@ -113,7 +126,7 @@ function main(error, data) {
 	if (error) {
 		console.log(erorr);
 	}
-
+	console.log(data)
 	myBubbleChart('#vis', data);
 }
 
