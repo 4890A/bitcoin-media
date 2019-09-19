@@ -130,7 +130,7 @@ function main(error, data) {
 		console.log(erorr);
 	}
 	console.log(data)
-	myBubbleChart('#vis', data);
+	myBubbleChart('#bubble-vis', data);
 }
 
 d3.json("../data/word_frequency.json", main)
