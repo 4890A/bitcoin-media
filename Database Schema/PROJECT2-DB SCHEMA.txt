@@ -1,0 +1,82 @@
+
+Database Name: project2db.sqlite
+
+Tables:
+
+(1) Name: tweets_loc1
+Fields: 
+- location_id INTEGER PRIMARY KEY,
+- location TEXT,
+- latitude INTEGER,
+- longitude INTEGER
+
+(2) Name: articles1
+Fields: 
+- article_id INTEGER PRIMARY KEY,
+- abstract TEXT,
+- date DATE,
+- headline TEXT,
+- url TEXT
+
+(3) Name: sentiment1
+Fields: 
+- sentiment_id INTEGER PRIMARY KEY,
+- negative INTEGER,
+- neutral INTEGER,
+- positive INTEGER
+
+(4) Name: tweets1
+Fields:
+- tweet_id INTEGER PRIMARY KEY,
+- hashtags TEXT,
+- text TEXT,
+- user TEXT,
+- user_loc TEXT,
+- date DATE,
+- sentiment TEXT
+
+(5) Name: BTC_Quotes1
+Fields:
+- BTC_index INTEGER PRIMARY KEY,
+- date DATE,
+- unix REAL,
+- average REAL,
+- open REAL,
+- high REAL,
+- low REAL,
+- close REAL
+
+(6) Name: GLD_Quotes1
+Fields:
+- GLD_index INTEGER PRIMARY KEY,
+- date DATE,
+- unix REAL,
+- average REAL,
+- open REAL,
+- high REAL,
+- low REAL,
+- close REAL
+
+(7) Name: SPX_Quotes1
+Fields:
+- SPX_index INTEGER PRIMARY KEY,
+- date DATE,
+- unix REAL,
+- average REAL,
+- open REAL,
+- high REAL,
+- low REAL,
+- close REAL
+
+(8) Name: country_coordinate1
+Fields:
+- country_index INTEGER PRIMARY KEY,
+- Country TEXT,
+- Latitude REAL,
+- Longitude REAL
+
+
+
+
+
+
