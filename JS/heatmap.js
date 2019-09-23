@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
   center: [37.7749, -122.4194],
-  zoom: 2
+  zoom: 3
 });
 
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -12,27 +12,19 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 var url = "/tweetsloc";
 
+console.log('I AM IN MAP ******')
+console.log(url)
+
+//d3.json(url).then(function(response) {
 d3.json(url, function(response) {
 
-  // console.log(response);
+  console.log(response);
 
-  var heatArray = [];
+  console.log(response.length)
 
-  console.log(response.lat.length)
-
-
-  for (var i = 0; i < response.lat.length; i++) {
-
-    // console.log('IN FOR **************')
-    // console.log(response.lat[i])
-    // console.log(response.lon[i])
-
-    heatArray.push([response.lat[i], response.lon[i]]);
-  }
-
-  var heat = L.heatLayer(heatArray, {
+  var heat = L.heatLayer(response, {
     radius: 20,
-    blur: 35
+    blur: 5
   }).addTo(myMap);
 
 });
