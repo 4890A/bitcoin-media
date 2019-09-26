@@ -50,14 +50,25 @@ country_coordinate = Base.classes.country_coordinate1
 @app.route("/")
 def index():
     """Return the homepage."""
-    #return render_template("index1.html")
+    # return render_template("index1.html")
     return render_template("index.html")
-    #return ("HI")
+ 
+
+ # @app.route("/googletrends")
+# def googletrends():
+
+#     with open('db/google-trend-data.json', 'w') as outfile:
+#         json.dump(data, outfile)
+
+#     return jsonify(data)
 
 
-    #stmt = db.session.query(Articles).statement
-    #df = pd.read_sql_query(stmt, db.session.bind)
-    #return jsonify(list(df['url']))
+@app.route("/tweetmap")
+def tweetmap():
+    """Return the homepage."""
+    # return render_template("index1.html")
+    return render_template("index1.html")
+
 
 @app.route("/tweetsloc")
 def tweetsloc():
