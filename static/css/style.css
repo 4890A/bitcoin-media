@@ -1,10 +1,12 @@
 body {
   padding: 0px;
   margin: 0px;
-  background: #f1f1f1;
+  background:#f5f1e0;
+  /* background: #f1f1f1; */
 }
 
-h1 {
+
+/* h1 {
   font-size: 80px;
   color: blue;
   text-align: center;
@@ -21,8 +23,8 @@ h2 {
 
 h3 {
   font-size: 30px;
-  text-align: center;
-}
+  text-align: center; 
+}*/
 
 
 #map,
@@ -31,3 +33,21 @@ html {
   height: 100%;
 }
 
+.title1{
+  color: lightseagreen;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title2{
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.title3{
+  color: lightseagreen;
+  font-size: 25px;
+  font-weight: bold;
+}

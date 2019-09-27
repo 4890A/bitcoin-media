@@ -51,7 +51,7 @@ country_coordinate = Base.classes.country_coordinate1
 def index():
     """Return the homepage."""
     # return render_template("index1.html")
-    return render_template("index.html")
+    return render_template("sentimenttweet.html")
  
 
  # @app.route("/googletrends")
@@ -67,7 +67,7 @@ def index():
 def tweetmap():
     """Return the homepage."""
     # return render_template("index1.html")
-    return render_template("index1.html")
+    return render_template("maptweets.html")
 
 
 @app.route("/tweetsloc")

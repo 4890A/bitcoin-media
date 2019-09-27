@@ -56,7 +56,7 @@ function tcomments (ptweets, tplace) {
     console.log(text1);
 
     //Write string including number of tweets
-    ptweets.append("p").text(text1).attr("font-size","80px");
+    ptweets.append("p").text(text1).classed("title3", true);
 
     };
 
@@ -69,8 +69,9 @@ function tcomments (ptweets, tplace) {
       name: "Negative",
       x: names1,
       y: neg1,
-      line: {color: "#17BECF"}
-      //marker: { color:"#17BECF", simbol: "diamond-x"}
+      // line: {color: "#17BECF"},
+      line: {color: "green"},
+      marker: { color:"#17BECF", simbol: "diamond-x"}
     };
 
     var trace2 = {
@@ -80,8 +81,9 @@ function tcomments (ptweets, tplace) {
       name: "Positive",
       x: names1,
       y: pos1,
-      line: {color: "blue"}
-      //marker: { color:"blue", simbol: "hexagram"}
+      // line: {color: "blue"},
+      line: {color: "orange"},
+      marker: { color:"blue", simbol: "hexagram"}
     };
 
     var trace3 = {
@@ -91,8 +93,9 @@ function tcomments (ptweets, tplace) {
       name: "Neutral",
       x: names1,
       y: neu1,
-      line: {color: "red"}
-      //marker: { color:"red", simbol: "cross"}
+      // line: {color: "red"},
+      line: {color: "blue"},
+      marker: { color:"red", simbol: "cross"}
     };
 
     var data = [trace1, trace2, trace3];
@@ -132,7 +135,6 @@ function tcomments (ptweets, tplace) {
       buildPieChart(datapie2, placepie2);
 
       var ntweets = tweetsnow.nsentiment.neutral + tweetsnow.nsentiment.negative + tweetsnow.nsentiment.positve
-      console.log("Number of tweets is JA JA JE JE: ", ntweets);
       var placet = "#ntw1";
 
       neg1.push((tweetsnow.nsentiment.negative/ntweets)*100);
@@ -141,13 +143,7 @@ function tcomments (ptweets, tplace) {
       names1.push(index1);
       index1 = index1 + 1;
 
-      console.log("BUILDING ARRAYS OF ....")
-      console.log(neg1);
-      console.log(pos1);
-      console.log(neu1);
-      console.log(names1);
-
-      var placeline = "line1"
+            var placeline = "line1"
       buildLineChart(placeline);
 
       writeNtweets (ntweets, placet);
