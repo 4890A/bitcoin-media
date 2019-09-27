@@ -56,9 +56,63 @@ function tcomments (ptweets, tplace) {
     console.log(text1);
 
     //Write string including number of tweets
-    ptweets.append("p").text(text1).attr("font-size","40px");
+    ptweets.append("p").text(text1).attr("font-size","80px");
 
     };
+
+  function buildLineChart(placel){
+
+    var trace1 = {
+      type: "scatter",
+      mode: "lines",
+      //mode: "markers",
+      name: "Negative",
+      x: names1,
+      y: neg1,
+      line: {color: "#17BECF"}
+      //marker: { color:"#17BECF", simbol: "diamond-x"}
+    };
+
+    var trace2 = {
+      type: "scatter",
+      mode: "lines",
+      //mode: "markers",
+      name: "Positive",
+      x: names1,
+      y: pos1,
+      line: {color: "blue"}
+      //marker: { color:"blue", simbol: "hexagram"}
+    };
+
+    var trace3 = {
+      type: "scatter",
+      mode: "lines",
+      //mode: "markers",
+      name: "Neutral",
+      x: names1,
+      y: neu1,
+      line: {color: "red"}
+      //marker: { color:"red", simbol: "cross"}
+    };
+
+    var data = [trace1, trace2, trace3];
+
+    var layout = {
+      title: "BITCOIN Tweets % Split",
+      xaxis: {title: "Number of Point"},
+      yaxis: {title: "% of Total"}
+      // xaxis: {
+      //   range: [startDate, endDate],
+      //   type: "date"
+      // },
+      // yaxis: {
+      //   autorange: true,
+      //   type: "linear"
+      // }
+    };
+
+    Plotly.newPlot(placel, data, layout);
+  };
 
   function readtweetsnow() {
     
@@ -80,6 +134,21 @@ function tcomments (ptweets, tplace) {
       var ntweets = tweetsnow.nsentiment.neutral + tweetsnow.nsentiment.negative + tweetsnow.nsentiment.positve
       console.log("Number of tweets is JA JA JE JE: ", ntweets);
       var placet = "#ntw1";
+
+      neg1.push((tweetsnow.nsentiment.negative/ntweets)*100);
+      pos1.push((tweetsnow.nsentiment.positve/ntweets)*100);
+      neu1.push((tweetsnow.nsentiment.neutral/ntweets)*100);
+      names1.push(index1);
+      index1 = index1 + 1;
+
+      console.log("BUILDING ARRAYS OF ....")
+      console.log(neg1);
+      console.log(pos1);
+      console.log(neu1);
+      console.log(names1);
+
+      var placeline = "line1"
+      buildLineChart(placeline);
 
       writeNtweets (ntweets, placet);
 
@@ -142,6 +211,12 @@ function tcomments (ptweets, tplace) {
   
   // Initialize the dashboard
   
+
+  var neg1 = [];
+  var pos1 = [];
+  var neu1 = [];
+  var names1 = [];
+  var index1 = 1;
 
   console.log("BEFORE INIT *******************");
   init();
