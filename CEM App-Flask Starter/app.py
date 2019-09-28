@@ -35,16 +35,18 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-# Save references to each table
+# Save references to each table for tweet data
 Articles = Base.classes.articles1
 Tweets = Base.classes.tweets1
 Tweets_loc = Base.classes.tweets_loc1
 Sentiment = Base.classes.sentiment1
 
+#Tables for Bitcoin Gold and SP index prices
 BTC_Quotes = Base.classes.BTC_Quotes1
 GLD_Quotes = Base.classes.GLD_Quotes1
 SPX_Quotes = Base.classes.SPX_Quotes1
 
+#Table with coordinates for world countries
 country_coordinate = Base.classes.country_coordinate1
 
 @app.route("/")
@@ -54,22 +56,13 @@ def index():
     return render_template("sentimenttweet.html")
  
 
- # @app.route("/googletrends")
-# def googletrends():
-
-#     with open('db/google-trend-data.json', 'w') as outfile:
-#         json.dump(data, outfile)
-
-#     return jsonify(data)
-
-
+#Route to present World Heat Map where tweets occurred is rendered
 @app.route("/tweetmap")
 def tweetmap():
-    """Return the homepage."""
-    # return render_template("index1.html")
     return render_template("maptweets.html")
 
 
+#
 @app.route("/tweetsloc")
 def tweetsloc():
     """Return a list with location for tweets and sentiment values"""
@@ -89,9 +82,10 @@ def tweetsloc():
     # Return a dictionary with tweets location and sentiment
     return jsonify(locations)
 
+#Get the number of positive, negative and neutral tweets read
 @app.route("/tweetsent")
 def tweetssent():
-    """Return a list with location for tweets and sentiment values"""
+    """Return a dictionary with split of tweets by type of sentiment (positive, negative & neutral)"""
 
     # Use Pandas to perform the sql query
     stmt = db.session.query(Sentiment).statement
@@ -103,16 +97,16 @@ def tweetssent():
         "neutral" : list(df["neutral"])
     }
 
-    # Return a dictionary with sentiment
+    # Return a dictionary with sentiment split
     return jsonify(sentiment)
 
 
-
+#Read tweets live - what people are tweeting about BITCOIN now
 @app.route("/readtweets")
 def readtweets():
     """Read tweets live"""
 
-    # Load credentials from json file
+    # Load twitter credentials from json file
     with open("twitter_credentials.json", "r") as file:
         creds = json.load(file)
 
@@ -162,7 +156,8 @@ def readtweets():
                 return 'neutral'
             else: 
                 return 'negative'
-    
+        
+        #Get 10 tweets at the time to avoid getting error
         def get_tweets(self, query, count = 10): 
             
             #Main function to fetch tweets and parse them. 
@@ -244,8 +239,6 @@ def readtweets():
     # Return a list of the column names (sample names)
     return jsonify(tweetsdict)
     #return jsonify(nsentiment)
-
-
 
 if __name__ == "__main__":
     app.run()
