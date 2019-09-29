@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Bitcoin Trending on Google</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="../static/css/trendsStyle.css" />
+
+    <title>Dropdown menu selector layer</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+  </head>
+
+  <body>
+
+    <div id="map"></div>
+
+      <form>
+        <div id='selector_menu'>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1"><strong>Select Year<strong></label>
+            <select class="form-control" id="exampleFormControlSelect1">
+            </select>
+          </div>
+        </div>
+
+        <div id='selector_menu1'>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1"><strong>Select Month<strong></label>
+              <select class="form-control" id="exampleFormControlSelect2">
+              </select>
+            </div>
+        </div>
+          
+        <div id='selector_button'>
+            <div class="form-group">
+                <button id="filter-btn" type="button" class="btn btn-primary">Display Month</button>
+            </div> 
+         </div>
+
+        <div id='selector_button1'>
+            <div class="form-group">
+              <button id="filter-btn1" type="button" class="btn btn-primary">Cycle All Months</button>
+          </div>
+        </div>
+    </form>
+  
+    </div>	
+
+    <!-- API key -->
+    <script src="../static/js/config.js"></script>
+
+    <!-- Data -->
+    <!-- <script src="../static/js/trendData.js"></script> -->
+ 
+    <!-- JS -->
+    <script src="../static/js/trend-logic.js"></script>
+
+ </body>
+
+</html>
