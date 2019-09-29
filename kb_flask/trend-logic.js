@@ -76,14 +76,15 @@ d3.json(url, function(trendData) {
     layers: [worldMap, trendOverlay]
   });
 
-  L.control.layers(baseMap, overlayMap, {collapsed: false}).addTo(myMap);
+  L.control.layers(baseMap, overlayMap, {collapsed: true}).addTo(myMap);
+
 
   // Text box to add a title at bottom of page
   L.Control.textbox = L.Control.extend({
     onAdd: function(myMap) {
     var text = L.DomUtil.create('div');
     text.id = "info_text";
-    text.innerHTML = "<h2 style='color:blue; font-size:50px;'>Bitcoin Trending on Google 2011–2019</h2>"
+    text.innerHTML = "<h2 style='color:#f95700; font-size:50px;'>Bitcoin Trending on Google 2011–2019</h2>"
     return text;
     },
     onRemove: function(myMap) { // continue
@@ -101,8 +102,7 @@ d3.json(url, function(trendData) {
     createTrendCircles(trendData, trendCircles);
     trendOverlay = L.layerGroup(trendCircles).addTo(myMap)
 
-    // if (dataCounter === trendData.length) {
-    if (dataCounter === 5) {
+    if (dataCounter === trendData.length) {
         clearInterval(trendInterval)
     }
   }, 100);
@@ -198,7 +198,7 @@ d3.json(url, function(trendData) {
   });  // end onbuttonclick Display one Month
 
 
-  // When user clicks "Re-run Months" button, cycle through all months
+  // When user clicks "Rerun Months" button, cycle through all months
   var button1 = d3.select("#filter-btn1");
 
   button1.on("click", function() {
@@ -209,8 +209,7 @@ d3.json(url, function(trendData) {
         createTrendCircles(trendData, trendCircles);
         trendOverlay = L.layerGroup(trendCircles).addTo(myMap)
 
-        // if (dataCounter === trendData.length) {
-        if (dataCounter === 5) {
+        if (dataCounter === trendData.length) {
             clearInterval(trendInterval)
         }
       }, 100);
