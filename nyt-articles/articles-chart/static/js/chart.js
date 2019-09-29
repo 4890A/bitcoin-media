@@ -1,5 +1,5 @@
-d3.json("../data/articles.json", data1 => {
-  d3.json("http://127.0.0.1:5000/btcquotes", data2 => {
+d3.json("/articles", data1 => {
+  d3.json("/quotes/BTC", data2 => {
     console.log(data1)
     console.log(data2)
     data_points = data1.length
@@ -17,7 +17,7 @@ d3.json("../data/articles.json", data1 => {
 
     // the dates on the articles do not direclty coorespond to btc quote data
     // everpolate is used to interpolate the price information at the time of 
-    // article publication
+    // article publication. Linear interpolation is not computationally expensive
     articlesPrice = everpolate.linear(
       articles.map(article => article.x),
       btcValues.map(quote => quote.x),
@@ -26,20 +26,30 @@ d3.json("../data/articles.json", data1 => {
     // append the interpolated prices into the data series
     articles.forEach((article, i) => (
       article.y = articlesPrice[i]
-    )
-    );
+    ));
 
     var data = {
-      series: [{ name: "series-a", data: articles},
-      { name: "series-b", data: btcValues}]
+      series: [{
+          name: "series-a",
+          data: articles
+        },
+        {
+          name: "series-b",
+          data: btcValues
+        }
+      ]
 
     };
-
-    // We are setting a few options for our chart and override the defaults
+    // chart options
     var options = {
+      height: window.innerHeight - 200,
+      chartPadding: {
+        top: 40,
+        right: 0,
+        bottom: 30,
+        left: 0
+      },
 
-      // Don't draw the line chart points
-      // Disable line smoothing
       // X-Axis specific configuration
       axisX: {
         type: Chartist.FixedScaleAxis,
@@ -48,36 +58,57 @@ d3.json("../data/articles.json", data1 => {
         // A technical limitation of the zoom chartist plugin limits the x series to numerical values
         // this label interpolation function formats the unix label to a string date
         // this requires the moment.js library
-        labelInterpolationFnc: function(value) {
+        labelInterpolationFnc: function (value) {
           return moment(value, "X").format('MMM D YYYY');
         },
-        // We can disable the grid for this axis
         showGrid: true,
-        // and also don't show the label
         showLabel: true,
       },
       // Y-Axis specific configuration
       axisY: {
         // Lets offset the chart a bit from the labels
         offset: 60,
-        // The label interpolation function enables you to modify the values
-        // used for the labels on each axis. Here we are converting the
-        // values into million pound.
       },
+      // add the tooltip and zoom plugins
       plugins: [
         Chartist.plugins.tooltip({
-          transformTooltipTextFnc: function(tooltip) {
+          transformTooltipTextFnc: function (tooltip) {
             var xy = tooltip.split(",");
-            return xy[1];
+            return moment(xy[0], "X").format('MMM D YYYY');
           }
         }),
         Chartist.plugins.zoom({
           onZoom: function (chart, reset) {
             storeReset(reset);
           }
+        }),
+        Chartist.plugins.ctAxisTitle({
+          axisX: {
+            axisTitle: 'Date',
+            axisClass: 'ct-axis-title',
+            offset: {
+              x: 0,
+              y: 40
+            },
+            textAnchor: 'middle'
+          },
+          axisY: {
+            axisTitle: 'Price USD',
+            axisClass: 'ct-axis-title',
+            offset: {
+              x: 0,
+              y: 15
+            },
+            textAnchor: 'middle',
+            flipTitle: true
+          }
+        }),
+        Chartist.plugins.legend({
+            legendNames: ['Articles', 'Price'],
         })
       ],
-      series:{
+      // these are series specific options
+      series: {
         'series-a': {
           showPoint: true,
           showLine: false,
@@ -92,11 +123,12 @@ d3.json("../data/articles.json", data1 => {
       }
     };
 
-    // All you need to do is pass your configuration as third parameter to the chart function
-    var chart = new Chartist.Line('.ct-chart', data, options);
-    var seq = 0 ;
-    var delay = 80 ;
-    var durations = 500 ;
+    var chart = new Chartist.Line('.ct-chart', data, options); // this creates th chart
+    var seq = 0; // initialize counter for the animations
+    var delay = 80;
+    var durations = 500;
+
+    // apply different rules on chart component as it is created to animation creation
     chart.on('draw', data => {
       seq++;
       if (data.type === 'line') {
@@ -113,8 +145,7 @@ d3.json("../data/articles.json", data1 => {
             to: 1
           }
         })
-      }
-      else if (data.type == 'point') {
+      } else if (data.type == 'point') {
         data.element.animate({
           opacity: {
             // The delay when we like to start the animation
@@ -127,41 +158,7 @@ d3.json("../data/articles.json", data1 => {
             to: 1
           }
         })
-      }
-      // grid line animation
-      /*
-      else if(data.type === 'grid') {
-        // Using data.axis we get x or y which we can use to construct our animation definition objects
-        var pos1Animation = {
-          begin: seq * delay,
-          dur: durations,
-          from: data[data.axis.units.pos + '1'] - 30,
-          to: data[data.axis.units.pos + '1'],
-          easing: 'easeOutQuart'
-        };
-    
-        var pos2Animation = {
-          begin: seq * delay,
-          dur: 1000,
-          from: data[data.axis.units.pos + '2'] - 100,
-          to: data[data.axis.units.pos + '2'],
-          easing: 'easeOutQuart'
-        }
-        var animations = {};
-        animations[data.axis.units.pos + '1'] = pos1Animation;
-        animations[data.axis.units.pos + '2'] = pos2Animation;
-        animations['opacity'] = {
-          begin: seq * delay,
-          dur: durations,
-          from: 0,
-          to: 1,
-          easing: 'easeOutQuart'
-        };
-    
-        data.element.animate(animations)
-        ;
-      } */
-      ;
+      };
     })
   })
 })
