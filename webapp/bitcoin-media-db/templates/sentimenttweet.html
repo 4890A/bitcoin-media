@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Twitter Sentiment</title>
+
+  <!-- FROM WORKING MAP -->
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+  <script src="static/js/echarts.min.js"></script>
+
+  <!-- Template -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./static/css/style.css"">
+
+
+</head>
+
+<body>
+
+    <nav class=" navbar navbar-light" style="background-color:rgb(249,148,0)">
+
+  <div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/comparison"><strong>
+            <font color="White">Asset Comparison</font>
+          </strong></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <strong>
+            <font color="white">Media</font>
+          </strong>
+        </a>
+        <div class="dropdown-menu menu-custom" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/nyt"><strong>New York Times</strong></a>
+          <a class="dropdown-item" href="/reddit"><strong>Reddit</strong></a>
+          <a class="dropdown-item" href="/google_map"><strong>Google</strong></a>
+          <a class="dropdown-item" href="/twitter"><strong>Twitter</strong></a>
+        </div>
+      </li>
+    </ul>
+    <br />
+  </div>
+
+  <div class="navbar header">
+    <a class="navbar-brand" href="/">
+      <img src="static/pics/bitcoin.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      <strong>
+        <font color="white">Bitcoin Media Sentiment Analysis</font>
+      </strong>
+    </a>
+  </div>
+
+  </nav>
+
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center"><strong>
+          <font color="#FF8C69">Bitcoin: A Trending Global Topic
+          </font>
+        </strong>
+      </h1>
+
+      <div id="canvas-container">
+        <div id="map">
+        </div>
+      </div>
+
+
+      <script type="text/javascript" src="static/js/heatmap.js"></script>
+
+      <!-- Leaflet heatmap plugin-->
+      <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+
+    </div>
+  </div>
+
+  <br />
+  <hr>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="text-center"><strong>
+            <font color="#FF8C69">Baseline Twitter Sentiment</font>
+          </strong></h1>
+        <div id="main"></div>
+        <script type="text/javascript">
+
+          var myChart = echarts.init(document.getElementById('main'));
+
+          setTimeout(function () {
+
+            option = {
+              legend: {},
+              tooltip: {
+                trigger: 'axis',
+                showContent: false
+              },
+              dataset: {
+                source: [
+                  ['time', '1:45', '1:55', '2:05', '2:14'],
+                  ['Negtive', 42, 38, 83, 21],
+                  ['Neutral', 160, 151, 411, 118],
+                  ['Positive', 115, 127, 311, 75],
+
+                ]
+              },
+              xAxis: {
+                type: 'category',
+                name: "Time (UTC)",
+                nameLocation: "middle",
+                nameGap: 40
+              },
+              yAxis: {
+                gridIndex: 0,
+                name: "Volume of Tweets",
+                nameLocation: "middle",
+                nameGap: 40
+              },
+              grid: { top: '55%' },
+              series: [
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row', color: 'rgb(255,175,0)' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row', color: 'rgb(153,255,153)' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row', color: 'rgb(255,102,102)' },
+                {
+                  type: 'pie',
+                  id: 'pie',
+                  radius: '30%',
+                  center: ['50%', '25%'],
+                  label: {
+                    formatter: '{b}: {@1:45} ({d}%)'
+                  },
+                  encode: {
+                    itemName: 'time',
+                    value: '1:45',
+                    tooltip: '1:45'
+                  },
+                  color: ['rgb(255,102,102)', 'rgb(255,175,0)', 'rgb(153,255,153']
+                }
+              ]
+            };
+
+            myChart.on('updateAxisPointer', function (event) {
+              var xAxisInfo = event.axesInfo[0];
+              if (xAxisInfo) {
+                var dimension = xAxisInfo.value + 1;
+                myChart.setOption({
+                  series: {
+                    id: 'pie',
+                    label: {
+                      formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                    },
+                    encode: {
+                      value: dimension,
+                      tooltip: dimension
+                    },
+                    color: ['rgb(255,175,0)', 'rgb(255,102,102)', 'rgb(153,255,153']
+                  }
+                });
+              }
+            });
+            myChart.setOption(option);
+            myChart.resize(
+              {
+                width: auto,
+                height: auto
+              });
+          });
+
+        // 使用刚指定的配置项和数据显示图表。
+        // myChart.setOption(option);
+
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center"><strong>
+            <font color="#FF8C69">Live Twitter Sentiment
+            </font>
+          </strong>
+        </h1>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-lg-4">
+            <div id="pie2"></div>
+          </div>
+
+          <div class="col-sm-12 col-lg-1"></div>
+
+          <div class="col-sm-12 col-lg-7">
+            <div id="line1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="well text-center">
+            <button id="filter-btn" type="button" class="btn btn-default">Read Tweets Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <br />
+    <hr>
+
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center"><strong>
+            <font color="#FF8C69">Most Recent Tweets</font>
+          </strong></h1>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="col-8 mx-auto">
+      <div class="container-fluid">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab-2" role="tablist">
+            <a class="nav-item nav-link active" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab"
+              aria-controls="nav-pos" aria-selected="true"><strong>Positive</strong></a>
+            <a class="nav-item nav-link" id="nav-neg-tab" data-toggle="tab" href="#nav-neg" role="tab"
+              aria-controls="nav-neg" aria-selected="false"><strong>Negative</strong></a>
+            <a class="nav-item nav-link" id="nav-neu-tab" data-toggle="tab" href="#nav-neu" role="tab"
+              aria-controls="nav-neu" aria-selected="false"><strong>Neutral</strong></a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
+            <div id="pos"></div>
+          </div>
+          <div class="tab-pane fade" id="nav-neg" role="tabpanel" aria-labelledby="nav-neg-tab">
+            <div id="neg"></div>
+          </div>
+          <div class="tab-pane fade" id="nav-neu" role="tabpanel" aria-labelledby="nav-neu-tab">
+            <div id="neu"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+
+
+  <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- <script src="{{ url_for('static', filename='js/bonus.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+
+  <!-- API key -->
+  <script type="text/javascript" src="static/js/config.js"></script>
+
+  <!-- JS -->
+  <!-- <script type="text/javascript" src="static/js/heatmap.js"></script> -->
+
+  <script type="text/javascript" src="static/js/tweeter1.js"></script>
+
+  <!-- Leaflet heatmap plugin-->
+  <!-- <script type="text/javascript" src="static/js/leaflet-heat.js"></script> -->
+
+  <!-- BITCOIN -->
+
+  <br />
+  <br />
+
+  </body>
+
+  <footer class="footer mt-auto">
+    <navbar>
+      <p class="text-center">
+        <a href="https://github.com/4890A/bitcoin-media">
+          <img class='github-logo img-fluid' src="static/pics/GitHub-Mark-32px-custom.png" alt="GitHub-Mark">
+        </a>
+      </p>
+    </navbar>
+  </footer>
+
+</html>
