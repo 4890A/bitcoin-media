@@ -1,0 +1,211 @@
+.chartist-tooltip {
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+  min-width: 5em;
+  padding: .5em;
+  background: #F4C63D;
+  color: #453D3F;
+  font-family: Oxygen,Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-transition: opacity .2s linear;
+  -moz-transition: opacity .2s linear;
+  -o-transition: opacity .2s linear;
+  transition: opacity .2s linear; }
+  .chartist-tooltip:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top-color: #F4C63D; }
+  .chartist-tooltip.tooltip-show {
+    opacity: 1; }
+
+.ct-area, .ct-line {
+  pointer-events: none; }
+
+/*# sourceMappingURL=chartist-plugin-tooltip.css.map */
+
+html {
+  background: #f5f1e0;
+}
+
+h1 {
+  font-family: 'Helvetica';
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  font-size: 45pt;
+  color: rgb(249,148,0);
+
+}
+
+
+
+@keyframes fade {
+  from {
+    stroke: black
+  }
+
+  to {
+    stroke: rgba(0, 0, 0, 0)
+  }
+}
+
+/* style the svg rect */
+.ct-zoom-rect {
+  fill: rgba(247, 190, 104, 0.3);
+  stroke: rgb(216, 142, 57);
+}
+
+.ct-chart .ct-series.ct-series-a .ct-line {
+  stroke: rgb(205, 78, 78);
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-line {
+  stroke: rgb(214, 186, 135);
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-c .ct-line {
+  stroke: rgb(135, 214, 168);
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+
+.ct-chart .ct-series.ct-series-b .ct-area {
+  fill: rgb(163, 198, 226);
+}
+
+.ct-chart {
+  position: relative;
+}
+
+.ct-legend {
+  position: relative;
+  z-index: 10;
+  list-style: none;
+  text-align: center;
+}
+
+.ct-legend li {
+  position: relative;
+  padding-left: 23px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.ct-legend li:before {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 0;
+  content: '';
+  border: 3px solid transparent;
+  border-radius: 2px;
+}
+
+.ct-legend li.inactive:before {
+  background: transparent;
+}
+
+.ct-legend.ct-legend-inside {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ct-legend.ct-legend-inside li {
+  display: block;
+  margin: 0;
+}
+
+.ct-legend .ct-series-0:before {
+  background-color: rgb(205, 78, 78);
+  border-color:rgb(205, 78, 78);
+}
+
+.ct-legend .ct-series-1:before {
+  background-color: rgb(214, 186, 135);;
+  border-color: rgb(214, 186, 135);;
+}
+
+.ct-legend .ct-series-2:before {
+  background-color: rgb(135, 214, 168);;
+  border-color:  rgb(135, 214, 168);;
+}
+
+.ct-legend .ct-series-3:before {
+  background-color: #d17905;
+  border-color: #d17905;
+}
+
+.ct-legend .ct-series-4:before {
+  background-color: #453d3f;
+  border-color: #453d3f;
+}
+
+.ct-legend .ct-series-5:before {
+  background-color: #59922b;
+  border-color: #59922b;
+}
+
+.ct-legend .ct-series-6:before {
+  background-color: #0544d3;
+  border-color: #0544d3;
+}
+
+.ct-legend .ct-series-7:before {
+  background-color: #6b0392;
+  border-color: #6b0392;
+}
+
+.ct-legend .ct-series-8:before {
+  background-color: #f05b4f;
+  border-color: #f05b4f;
+}
+
+.ct-legend .ct-series-9:before {
+  background-color: #dda458;
+  border-color: #dda458;
+}
+
+.ct-legend .ct-series-10:before {
+  background-color: #eacf7d;
+  border-color: #eacf7d;
+}
+
+.ct-legend .ct-series-11:before {
+  background-color: #86797d;
+  border-color: #86797d;
+}
+
+.ct-legend .ct-series-12:before {
+  background-color: #b2c326;
+  border-color: #b2c326;
+}
+
+.ct-legend .ct-series-13:before {
+  background-color: #6188e2;
+  border-color: #6188e2;
+}
+
+.ct-legend .ct-series-14:before {
+  background-color: #a748ca;
+  border-color: #a748ca;
+}
+
+/*# sourceMappingURL=legend.css.map */

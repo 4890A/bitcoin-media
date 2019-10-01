@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Google Temp</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="./static/css/style.css"">
+    <link rel=" stylesheet" href="../static/css/trendsStyle.css" />
+
+    <title>Dropdown menu selector layer</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+    <nav class=" navbar navbar-light" style="background-color:rgb(249,148,0)">
+
+        <div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/comparison"><strong>
+                            <font color="White">Asset Comparison</font>
+                        </strong></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong>
+                            <font color="white">Media</font>
+                        </strong>
+                    </a>
+                    <div class="dropdown-menu menu-custom" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/nyt"><strong>New York Times</strong></a>
+                        <a class="dropdown-item" href="/reddit"><strong>Reddit</strong></a>
+                        <a class="dropdown-item" href="#"><strong>Google</strong></a>
+                        <a class="dropdown-item" href="/twitter"><strong>Twitter</strong></a>
+                    </div>
+                </li>
+            </ul>
+            <br />
+        </div>
+
+        <div class="navbar header">
+            <a class="navbar-brand" href="/">
+                <img src="static/pics/bitcoin.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                <strong>
+                    <font color="white">Bitcoin Media Sentiment Analysis</font>
+                </strong>
+            </a>
+        </div>
+
+    </nav>
+
+    <div class="container-fluid">
+        <h1
+            style="font-size: 48px;font-style: italic;font-weight: 700;letter-spacing: -0.002em;line-height: 1; text-align: center; color: orange;">
+            Bitcoin on Google Trends 2011-2019
+        </h1>
+        <br />
+
+        <form>
+            <div id='selector_menu'>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1"><strong>Select Year<strong></label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    </select>
+                </div>
+            </div>
+
+            <div id='selector_menu1'>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1"><strong>Select Month<strong></label>
+                    <select class="form-control" id="exampleFormControlSelect2">
+                    </select>
+                </div>
+            </div>
+
+            <div id='selector_button'>
+                <div class="form-group">
+                    <button id="filter-btn" type="button" class="btn btn-primary">Display Month</button>
+                </div>
+            </div>
+
+            <div id='selector_button1'>
+                <div class="form-group">
+                    <button id="filter-btn1" type="button" class="btn btn-primary">Cycle All Months</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="canvas-container">
+        <div id="google-map"></div>
+    </div>
+
+
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/trend-logic.js"></script>
+
+    <br />
+    <br />
+    <br />
+</body>
+
+
+
+<footer class="footer mt-auto">
+    <navbar>
+        <p class="text-center">
+            <a href="https://github.com/4890A/bitcoin-media">
+                <img class='github-logo img-fluid' src="static/pics/GitHub-Mark-32px-custom.png" alt="GitHub-Mark">
+            </a>
+        </p>
+    </navbar>
+</footer>
+
+
+</html>
