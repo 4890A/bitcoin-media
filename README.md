@@ -1,8 +1,8 @@
 ## A website for exploring online sentiment and other media based trends regarding bitcoin and its price
 
-![Screen Shot 2019-10-03 at 18.20.44](img/Screen Shot 2019-10-03 at 18.20.44.png)
 
 
+![](img/Screen Shot 2019-10-03 at 18.20.44.png)
 
 ![Screen Shot 2019-10-03 at 18.21.30](img/Screen Shot 2019-10-03 at 18.21.30.png)
 
