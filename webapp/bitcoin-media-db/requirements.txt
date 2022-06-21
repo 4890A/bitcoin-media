@@ -24,7 +24,7 @@ cssmin == 0.2.0
 jsmin == 2.2.2
 
 # app.py: 4
-numpy == 1.16.4
+numpy == 1.22.0
 
 # app.py: 3
 pandas == 0.24.2
